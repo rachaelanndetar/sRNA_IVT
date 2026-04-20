@@ -1,0 +1,29 @@
+#!/bin/bash
+#SBATCH --job-name=bowtie2_end2end
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=radetar@colostate.edu
+#SBATCH --time=72:00:00
+#SBATCH --output=%j_bowtie2_end2end.out
+
+
+####NOTES####
+#Arg 1- Pass path to reference genome.Be sure to create a bowtie index of your reference genome in advance by doing bowtie2-build <reference_in>
+#Arg 2 - Path to file with merged reads, or to R1 file if using PE
+#Arg 3 - Path to R2 file if using PE
+
+
+
+#run from  DMS_seq/
+now="$(date)"
+echo "Date and time run: $now"
+
+file=$(basename $2)
+
+outdir=${2%$file}samfiles_end2end
+
+mkdir -p $outdir  #makes directory to place samfiles in folder where fastq files are.
+
+#bowtie2 --very-sensitive -L 10 -N 1 -x $1 -1 $2 -2 $3 -S $outdir/${2%1.fq.gz}paired.sam #paired
+
+bowtie2 --very-sensitive -L 10 -N 1 -x $1 -U $2 -S $outdir/${2%.fq.gz}.sam
+

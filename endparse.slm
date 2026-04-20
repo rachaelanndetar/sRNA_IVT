@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --job-name=endparse
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=radetar@colostate.edu
+#SBATCH --time=72:00:00
+#SBATCH --output=%j_endparse.out
+
+
+####NOTES####
+
+
+
+
+#run from  DMS_seq/
+now="$(date)"
+echo "Date and time run: $now"
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Eco_fmet_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Eco_fmet_filtered_sorted_depth.txt"     --ref_len 240     --hh 58     --hdv 135
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Ath_mito_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Ath_mito_filtered_sorted_depth.txt"     --ref_len 240     --hh 58     --hdv 135
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Shi_mito_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Shi_mito_filtered_sorted_depth.txt"     --ref_len 240     --hh 58     --hdv 135
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Bla_mito_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Bla_mito_filtered_sorted_depth.txt"     --ref_len 244     --hh 58     --hdv 139
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Ath_nucl_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Ath_nucl_filtered_sorted_depth.txt"     --ref_len 238     --hh 58     --hdv 133
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Shi_nucl_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Shi_nucl_filtered_sorted_depth.txt"     --ref_len 238     --hh 58     --hdv 133
+
+python3 endparse.py     -s "fastq/samfiles_end2end/merge_trim_Bfun_nuc_filtered.sam"     -d "fastq/samfiles_end2end/merge_trim_Bfun_nuc_filtered_sorted_depth.txt"     --ref_len 238     --hh 58     --hdv 133
+
